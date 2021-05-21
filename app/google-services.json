@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "732381437344",
+    "project_id": "versustest-aae57",
+    "storage_bucket": "versustest-aae57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732381437344:android:80cacdad8327e98bc518c5",
+        "android_client_info": {
+          "package_name": "com.example.versustest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732381437344-3dk2892ki13k0hoirl81bfdlm6guov59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.versustest",
+            "certificate_hash": "4cf863e56e83e1041ca54bab2d934535c1b7b986"
+          }
+        },
+        {
+          "client_id": "732381437344-lvpisler455jm012onghisdr04gkssfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0Vrnc2SSF6d3F8zXgGg_rcrtAbuN-H2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732381437344-lvpisler455jm012onghisdr04gkssfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
