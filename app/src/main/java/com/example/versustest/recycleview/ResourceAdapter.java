@@ -20,9 +20,11 @@ import java.util.List;
 public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.resourceviewholder> {
 
     List<ImageResource> mdata;
+    ResourceCallback callback;
 
-    public ResourceAdapter(List<ImageResource> mdata) {
+    public ResourceAdapter(List<ImageResource> mdata , ResourceCallback callback) {
         this.mdata = mdata;
+        this.callback = callback ;
     }
 
 
@@ -47,7 +49,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.resour
         Glide.with(holder.itemView.getContext())
                 .load(mdata.get(position).getDrawableResource()) //установить URL-адрес описания img
                 .centerCrop()
-                .into(holder.imgResource); // путь назначения
+                .into(holder.base); // путь назначения
 
 
     }
@@ -59,16 +61,27 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.resour
 
     public class resourceviewholder extends RecyclerView.ViewHolder {
 
-        ImageView imgResource,base;
-        TextView description;
+        ImageView container,base, newImage;
+        TextView textView,textNewView;
+
 
         public resourceviewholder(@NonNull View itemView) {
             super(itemView);
 
-            description = itemView.findViewById(R.id.item_text_description);
-            base = itemView.findViewById(R.id.item_base_image);
-            imgResource = itemView.findViewById(R.id.item_resource_img);
+            container = itemView.findViewById(R.id.container);
+            newImage = itemView.findViewById(R.id.act_new_img);
+            textNewView = itemView.findViewById(R.id.text_name_new);
+            base = itemView.findViewById(R.id.item_1_img);
+            textView = itemView.findViewById(R.id.textName);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.onResourceItemClick(getAdapterPosition(),
+                            newImage,
+                            textNewView);
+                }
+            });
 
         }
     }

@@ -2,7 +2,9 @@ package com.example.versustest.model;
 
 import java.io.Serializable;
 
-public class ImageResource {
+// реализует интерфейс Serializable, важно отправить объект руководства другому действию
+
+public class ImageResource implements Serializable{
 
     private String imgResource, base, description;
     private int drawableResource; // это для целей тестирования...
