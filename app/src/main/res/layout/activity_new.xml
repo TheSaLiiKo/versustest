@@ -23,8 +23,7 @@
                 android:id="@+id/act_new_img"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/termopast" />
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:transitionName="textNewTN"
@@ -32,10 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="5dp"
-                android:text="Удалите сначала остатки старой термопасты, если они имеются,
-при помощи ватных палочек или хлопковой салфетки. Затем нанесите одну каплю термопасты
-на процессор и равномерное распределите ее очень тонким слоем при помощи, например,
-ненужной пластиковой карты или кисти, если есть в комплекте с термопастой." />
+                android:text="Text" />
 
         </LinearLayout>
 

@@ -9,9 +9,6 @@ public class ImageResource implements Serializable{
     private String imgResource, base, description;
     private int drawableResource; // это для целей тестирования...
 
-    public ImageResource(String title) {
-
-    }
 
     public ImageResource(int drawableResource) {
         this.drawableResource = drawableResource;
@@ -55,5 +52,27 @@ public class ImageResource implements Serializable{
     public void setDrawableResource(int drawableResource) {
         this.drawableResource = drawableResource;
     }
+    String text;
+    String image;
+
+    public String getText() { return text; }
+
+    public void setText(String text) { this.text = text; }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
+
+    private String imageUrl;
+    public  ImageResource(){
+    }
+    public ImageResource(String imageUrl){ this.imageUrl = imageUrl; }
+
+    public String getImageUrl() { return imageUrl; }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
+
 

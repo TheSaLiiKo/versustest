@@ -1,5 +1,7 @@
 package com.example.versustest.recycleview;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,74 +17,80 @@ import com.example.versustest.MainActivity;
 import com.example.versustest.R;
 import com.example.versustest.model.ImageResource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.resourceviewholder> {
 
-    List<ImageResource> mdata;
-    ResourceCallback callback;
+    private ArrayList<ImageResource> hlist;   //image
+    private Context context;                  //image
 
-    public ResourceAdapter(List<ImageResource> mdata , ResourceCallback callback) {
-        this.mdata = mdata;
-        this.callback = callback ;
+    public ResourceAdapter(Context context, ArrayList<ImageResource> hlist, OnResourceListener mOnResourceListener) {
+        this.context = context;
+        this.hlist = hlist;
+        this.mOnResourceListener = mOnResourceListener;
     }
 
+    private OnResourceListener mOnResourceListener;
+
+    List<ImageResource> mdata;
+
+    public ResourceAdapter(Context context, ArrayList<ImageResource> mlist) {
+        this.context = context;
+        this.hlist = mlist;
+    }
 
 
     @NonNull
     @Override
     public resourceviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_resource, parent, false);
-
-        return new resourceviewholder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_resource,parent,false);
+        return new resourceviewholder(view, mOnResourceListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull resourceviewholder holder, int position) {
 
-        //привязать сюда данные об элементе Описания
-        //Я просто скомбинирую изображение..
-
         //загрузить изображение с помощью Glide
+        Log.e("nlist get Image " ,hlist.get(position).getImage()+" ");
+        Log.e("nlist get Image URL " , hlist.get(position).getImageUrl()+" ");
 
-        Glide.with(holder.itemView.getContext())
-                .load(mdata.get(position).getDrawableResource()) //установить URL-адрес описания img
-                .centerCrop()
-                .into(holder.base); // путь назначения
+        Glide.with(context).load(hlist.get(position).getImage()).into(holder.base);
+
+        ImageResource imageResource = hlist.get(position);
+        holder.textView.setText(imageResource.getText());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return mdata.size();
+        return hlist.size();
     }
 
-    public class resourceviewholder extends RecyclerView.ViewHolder {
+    public class resourceviewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView container,base, newImage;
-        TextView textView,textNewView;
+        ImageView base;
+        TextView textView;
+        OnResourceListener onResourceListener;
 
-
-        public resourceviewholder(@NonNull View itemView) {
+        public resourceviewholder(@NonNull View itemView, OnResourceListener onResourceListener) {
             super(itemView);
 
-            container = itemView.findViewById(R.id.container);
-            newImage = itemView.findViewById(R.id.act_new_img);
-            textNewView = itemView.findViewById(R.id.text_name_new);
             base = itemView.findViewById(R.id.item_1_img);
             textView = itemView.findViewById(R.id.textName);
+            this.onResourceListener = onResourceListener;
+            itemView.setOnClickListener(this);
+        }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callback.onResourceItemClick(getAdapterPosition(),
-                            newImage,
-                            textNewView);
-                }
-            });
+        @Override
+        public void onClick(View v) {
+onResourceListener.onResourceClick(getAdapterPosition());
+
 
         }
     }
+public interface OnResourceListener{
+        void onResourceClick(int position);
+}
 }
